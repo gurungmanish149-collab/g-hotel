@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Search | G Hotel</title>
+  <link rel="stylesheet" href="Search.css">
+</head>
+<body>
+
+  <!-- Header (共通) -->
+  <header class="site-header">
+    <nav class="navbar">
+      <h1 class="logo"><a href="index.html">G Hotel</a></h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Rooms.html">Rooms</a></li>
+        <li><a href="Search.html" class="active">Search</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        <li><a href="Stay.html">Stay</a></li>
+        <li><a href="Dine.html">Dine</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Booking Section -->
+  <main class="section">
+    <h2></h2>
+  
+    <form id="search-form">
+  
+      <div class="form-row">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="full name" required>
+      </div>
+  
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="@email.com" required>
+      </div>
+  
+      <div class="form-row">
+        <label for="checkin">Check-in</label>
+        <input type="date" id="checkin" name="checkin" required>
+      </div>
+  
+      <div class="form-row">
+        <label for="checkout">Check-out</label>
+        <input type="date" id="checkout" name="checkout" required>
+      </div>
+
+      <div class="form-row">
+        <label for="rooms">Rooms</label>
+        <input type="number" id="rooms" min="1" max="3"　value="1 required">
+      </div>
+
+      <div class="form-row">
+        <label for="adults">Adults</label>
+        <input type="number" id="adults" min="1" max="10" value="1" required>
+      </div>
+      
+      <div class="form-row">
+        <label for="children">Children</label>
+        <input type="number" id="children" min="0" max="10" value="0">
+      </div>
+      
+      <p id="guest-warning" style="color:rgb(109, 8, 8);"></p>
+      <p id="room-warning" style="color:rgb(109, 8, 8);"></p>
+
+      
+      <div class="form-row">
+        <label for="room-type">Room type</label>
+        <select id="room-type" name="roomType" required>
+          <option value="">Select a room</option>
+          <option value="standard">Standard Room</option>
+          <option value="deluxe">Deluxe Room</option>
+          <option value="suite">Suite</option>
+        </select>
+      </div>
+  
+      <div class="form-row">
+        <button type="submit">検索</button>
+      </div>
+  
+    </form>
+    
+  
+    <!-- Results will appear here -->
+    <div id="results" class="results"></div>
+  </main>
+  
+
+  <!-- Footer (共通) -->
+  <footer class="site-footer">
+    <p>&copy; 2025 MyHotel. All rights reserved.</p>
+  </footer>
+
+  <script src="Search.js"></script>
+  
+
+</body>
+</html>

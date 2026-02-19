@@ -1,0 +1,199 @@
+/* =========================
+   Base
+========================= */
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: #111;
+  background: #f6f8fc;
+}
+
+a{ color: inherit; text-decoration: none; }
+
+img{
+  width: 100%;
+  display: block;
+}
+
+/* =========================
+   Header / Nav (共通)
+========================= */
+.site-header{
+  background: rgba(15, 23, 42, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.navbar{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo a{
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.nav-links{
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.nav-links a{
+  color: rgba(255,255,255,0.92);
+  font-weight: 650;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover{
+  background: rgba(255,255,255,0.12);
+}
+
+.nav-links a.active{
+  background: rgba(255,255,255,0.18);
+}
+
+/* =========================
+   Main Section
+========================= */
+.section{
+  max-width: 1100px;
+  margin: 28px auto 60px;
+  padding: 0 16px;
+}
+
+.section h2{
+  margin: 0 0 16px;
+  font-size: 30px;
+  letter-spacing: 0.2px;
+}
+
+/* =========================
+   Rooms Grid
+========================= */
+.rooms-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* link wrapper */
+.room-card-link{
+  display: block;
+}
+
+/* card */
+.room-card{
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* image area */
+.room-card img{
+  height: 190px;
+  object-fit: cover;
+}
+
+/* content spacing */
+.room-card h3{
+  margin: 14px 14px 6px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.room-card p{
+  margin: 0 14px 12px;
+  color: #475569;
+  line-height: 1.6;
+  font-size: 14px;
+  flex-grow: 1; /* ボタンを下に揃える */
+}
+
+/* price */
+.price{
+  margin: 0 14px 12px;
+  font-weight: 900;
+  color: #111;
+  font-size: 16px;
+}
+
+/* button-like */
+.room-btn{
+  margin: 0 14px 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 999px;
+  background: #1a5cff;
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 14px 28px rgba(26, 92, 255, 0.25);
+  transition: 0.2s ease;
+}
+
+/* hover effect */
+.room-card-link:hover .room-card{
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(0,0,0,0.14);
+}
+
+.room-card-link:hover .room-btn{
+  filter: brightness(0.95);
+}
+
+/* =========================
+   Footer
+========================= */
+.site-footer{
+  background: #0f172a;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 980px){
+  .rooms-container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px){
+  .rooms-container{
+    grid-template-columns: 1fr;
+  }
+  .section h2{
+    font-size: 26px;
+  }
+  .nav-links{
+    gap: 8px;
+  }
+}

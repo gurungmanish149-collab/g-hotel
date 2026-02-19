@@ -1,0 +1,201 @@
+/* =========================
+   Base
+========================= */
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color: #111;
+  background: #f6f8fc;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* =========================
+   Header / Nav (共通)
+========================= */
+.site-header{
+  background: rgba(15, 23, 42, 0.95);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.navbar{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.logo a{
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.nav-links{
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.nav-links a{
+  color: rgba(255,255,255,0.92);
+  font-weight: 650;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover{
+  background: rgba(255,255,255,0.12);
+}
+
+.nav-links a.active{
+  background: rgba(255,255,255,0.18);
+}
+
+/* =========================
+   Main Section
+========================= */
+.section{
+  max-width: 960px;
+  margin: 28px auto 60px;
+  padding: 0 16px;
+}
+
+.section h2{
+  margin: 0 0 10px;
+  font-size: 32px;
+  letter-spacing: 0.2px;
+}
+
+/* subtitle text */
+.section p{
+  margin: 0 0 18px;
+  color: #475569;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* =========================
+   Dine Hero Card (綺麗に見せる)
+========================= */
+.section{
+  position: relative;
+}
+
+/* 背景っぽいバナーを作る（画像無しでも映える） */
+.section::before{
+  content: "";
+  display: block;
+  height: 240px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(26,92,255,0.18), rgba(255,255,255,0.0)),
+    linear-gradient(180deg, rgba(15,23,42,0.10), rgba(255,255,255,0.95));
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+  margin-bottom: 18px;
+}
+
+/* バナーの上に文字を重ねる */
+.section h2,
+.section p{
+  position: relative;
+  margin-left: 16px;
+}
+
+/* タイトルをバナーの上に見せる */
+.section h2{
+  margin-top: -210px; /* バナーに重ねる */
+  color: #0f172a;
+  font-weight: 900;
+}
+
+.section p{
+  max-width: 520px;
+}
+
+/* =========================
+   Optional: Menu Cards (将来拡張用)
+   results / menu など増やしても使える
+========================= */
+.menu-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.menu-card{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+}
+
+.menu-card img{
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.menu-card .menu-body{
+  padding: 12px;
+}
+
+.menu-card .menu-title{
+  font-weight: 900;
+  margin: 0 0 6px;
+}
+
+.menu-card .menu-text{
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================
+   Footer
+========================= */
+.site-footer{
+  background: #0f172a;
+  color: #cbd5e1;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 900px){
+  .menu-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px){
+  .nav-links{ gap: 8px; }
+
+  .section::before{
+    height: 220px;
+  }
+
+  .section h2{
+    margin-top: -195px;
+    font-size: 28px;
+  }
+
+  .menu-grid{ grid-template-columns: 1fr; }
+}
