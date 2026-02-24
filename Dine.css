@@ -13,7 +13,7 @@ body{
 a { color: inherit; text-decoration: none; }
 
 /* =========================
-   Header / Nav (共通)
+   Header / Nav
 ========================= */
 .site-header{
   background: rgba(15, 23, 42, 0.95);
@@ -57,116 +57,59 @@ a { color: inherit; text-decoration: none; }
   transition: 0.2s ease;
 }
 
-.nav-links a:hover{
-  background: rgba(255,255,255,0.12);
-}
-
-.nav-links a.active{
-  background: rgba(255,255,255,0.18);
-}
+.nav-links a:hover{ background: rgba(255,255,255,0.12); }
+.nav-links a.active{ background: rgba(255,255,255,0.18); }
 
 /* =========================
-   Main Section
+   Dine Gallery (1 box)
 ========================= */
-.section{
-  max-width: 960px;
-  margin: 28px auto 60px;
+.dine-gallery {
+  max-width: 1100px;
+  margin: 50px auto;
   padding: 0 16px;
-}
 
-.section h2{
-  margin: 0 0 10px;
-  font-size: 32px;
-  letter-spacing: 0.2px;
-}
-
-/* subtitle text */
-.section p{
-  margin: 0 0 18px;
-  color: #475569;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-/* =========================
-   Dine Hero Card (綺麗に見せる)
-========================= */
-.section{
-  position: relative;
-}
-
-/* 背景っぽいバナーを作る（画像無しでも映える） */
-.section::before{
-  content: "";
-  display: block;
-  height: 240px;
-  border-radius: 18px;
-  background:
-    linear-gradient(135deg, rgba(26,92,255,0.18), rgba(255,255,255,0.0)),
-    linear-gradient(180deg, rgba(15,23,42,0.10), rgba(255,255,255,0.95));
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
-  margin-bottom: 18px;
-}
-
-/* バナーの上に文字を重ねる */
-.section h2,
-.section p{
-  position: relative;
-  margin-left: 16px;
-}
-
-/* タイトルをバナーの上に見せる */
-.section h2{
-  margin-top: -210px; /* バナーに重ねる */
-  color: #0f172a;
-  font-weight: 900;
-}
-
-.section p{
-  max-width: 520px;
-}
-
-/* =========================
-   Optional: Menu Cards (将来拡張用)
-   results / menu など増やしても使える
-========================= */
-.menu-grid{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 
-.menu-card{
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 16px;
+/* individual card */
+.img {
+  background: #ffffff;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.menu-card img{
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
+.img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.18);
 }
 
-.menu-card .menu-body{
-  padding: 12px;
-}
-
-.menu-card .menu-title{
-  font-weight: 900;
-  margin: 0 0 6px;
-}
-
-.menu-card .menu-text{
+/* title */
+.img h1 {
   margin: 0;
-  color: #475569;
-  font-size: 14px;
-  line-height: 1.6;
+  padding: 14px 16px;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0f172a;
+  background: linear-gradient(90deg, rgba(26,92,255,0.12), rgba(255,255,255,0));
 }
+
+/* image */
+.img img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.img:hover img { transform: scale(1.06); }
 
 /* =========================
    Footer
@@ -181,21 +124,11 @@ a { color: inherit; text-decoration: none; }
 /* =========================
    Responsive
 ========================= */
-@media (max-width: 900px){
-  .menu-grid{ grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 700px) {
+  .dine-gallery { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px){
   .nav-links{ gap: 8px; }
-
-  .section::before{
-    height: 220px;
-  }
-
-  .section h2{
-    margin-top: -195px;
-    font-size: 28px;
-  }
-
-  .menu-grid{ grid-template-columns: 1fr; }
+  .img img{ height: 220px; }
 }
