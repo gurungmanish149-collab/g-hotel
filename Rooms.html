@@ -26,40 +26,45 @@
   <main class="section">
     <h2>Our Rooms</h2>
 
-    <div class="rooms-container">
+    <div class="rooms-slider">
 
-      <a href="Search.html" class="room-card-link">
-        <div class="room-card">
-          <img src="images/standard.jpg" alt="Standard Room">
-          <h3>Standard Room</h3>
-          <p>Comfortable room with basic facilities, perfect for short stays.</p>
-          <div class="price">¥8,000 / night</div>
-          <span class="room-btn">Book Now</span>
+      <button class="arrow left" id="prevBtn">‹</button>
+    
+      <div class="rooms-wrapper">
+        <div class="rooms-track" id="roomsTrack">
+    
+          <div class="room-slide">
+            <img src="images/standard.jpg" alt="Standard Room">
+            <div class="room-info">
+              <h3>Standard Room</h3>
+              <p>Comfortable room with basic facilities.</p>
+              <div class="price">¥8,000 / night</div>
+            </div>
+          </div>
+    
+          <div class="room-slide">
+            <img src="images/deluxe.jpg" alt="Deluxe Room">
+            <div class="room-info">
+              <h3>Deluxe Room</h3>
+              <p>Spacious room with great city views.</p>
+              <div class="price">¥12,000 / night</div>
+            </div>
+          </div>
+    
+          <div class="room-slide">
+            <img src="images/suite.jpg" alt="Suite">
+            <div class="room-info">
+              <h3>Suite</h3>
+              <p>Luxury suite with living room and balcony.</p>
+              <div class="price">¥20,000 / night</div>
+            </div>
+          </div>
+    
         </div>
-      </a>
-      
-
-      <a href="Search.html" class="room-card-link">
-        <div class="room-card">
-          <img src="images/deluxe.jpg" alt="Deluxe Room">
-          <h3>Deluxe Room</h3>
-          <p>Spacious room with great city views and premium comfort.</p>
-          <div class="price">¥12,000 / night</div>
-          <span class="room-btn">Book Now</span>
-        </div>
-      </a>
-      
-      <a href="Search.html" class="room-card-link">
-        <div class="room-card">
-          <img src="images/suite.jpg" alt="Suite">
-          <h3>Suite</h3>
-          <p>Luxury suite with living room, balcony, and top-class amenities.</p>
-          <div class="price">¥20,000 / night</div>
-          <span class="room-btn">Book Now</span>
-        </div>
-      </a>
-      
-
+      </div>
+    
+      <button class="arrow right" id="nextBtn">›</button>
+    
     </div>
   </main>
 
@@ -67,7 +72,7 @@
   <footer class="site-footer">
     <p>&copy; 2025 MyHotel. All rights reserved.</p>
   </footer>
-  <script src="Search.html"></script>
+  <script src="Rooms.js"></script>
 
 </body>
 </html>

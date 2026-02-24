@@ -8,48 +8,114 @@
 <body>
 
   <header class="site-header">
-    <!-- Image Slider -->
-<div class="slider">
-  <img src="images/hotel1.jpg" class="slide active" alt="hotel">
-  <img src="images/hotel2.png" class="slide" alt="frontdesk">
-  <img src="images/hotel3.png" class="slide" alt="sakura">
-  <img src="images/hotel4.png" class="slide" alt="nightcity">
-</div>
-
+    <div class="slider">
+      <img src="images/hotel1.jpg" class="slide active" alt="hotel">
+      <img src="images/hotel2.png" class="slide" alt="frontdesk">
+      <img src="images/hotel3.png" class="slide" alt="sakura">
+      <img src="images/hotel4.png" class="slide" alt="nightcity">
+    </div>
+  
     <nav class="navbar">
-      <h1 class="logo"><a href="index.html">G Hotel</a></h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="Rooms.html">Rooms</a></li>
-        <li><a href="Search.html">Search</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-        <li><a href="Stay.html">Stay</a></li>
-        <li><a href="Dine.html">Dine</a></li>
-      </ul>
+      ...
     </nav>
+  
+    <!-- HERO overlay -->
+    <div class="hero">
+      <h2>Find your perfect stay</h2>
+      <p>Book comfortable rooms at the best prices.</p>
+  
+      <div class="hero-actions">
+        <a class="btn primary" href="Search.html">Search Rooms</a>
+        <a class="btn ghost" href="Rooms.html">View Rooms</a>
+      </div>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>Find your perfect stay</h2>
-    <p>Book comfortable rooms at the best prices.</p>
-  </section>
-
+  <main>
+    <section class="section">
+      <h3 class="section-title">Why choose G Hotel</h3>
+      <div class="grid3">
+        <div class="card">
+          <h4>Prime Location</h4>
+          <p>Walk to popular spots, stations, and shopping areas.</p>
+        </div>
+        <div class="card">
+          <h4>Luxury Rooms</h4>
+          <p>Comfortable beds, clean design, and city views.</p>
+        </div>
+        <div class="card">
+          <h4>Great Dining</h4>
+          <p>Fresh breakfast and seasonal menu prepared daily.</p>
+        </div>
+      </div>
+    </section>
+  
+    <section class="section alt">
+      <h3 class="section-title">Popular Rooms</h3>
+      <div class="grid3">
+        <article class="room-card">
+          <img src="images/deluxe.jpg" alt="Deluxe room">
+          <div class="room-body">
+            <h4>Deluxe Room</h4>
+            <p>From ¥12,000 / night</p>
+            <a class="link" href="Rooms.html">See details →</a>
+          </div>
+        </article>
+  
+        <article class="room-card">
+          <img src="images/standard.jpg" alt="Standard room">
+          <div class="room-body">
+            <h4>Twin Room</h4>
+            <p>From ¥10,500 / night</p>
+            <a class="link" href="Rooms.html">See details →</a>
+          </div>
+        </article>
+  
+        <article class="room-card">
+          <img src="images/suite.jpg" alt="Suite room">
+          <div class="room-body">
+            <h4>Suite</h4>
+            <p>From ¥22,000 / night</p>
+            <a class="link" href="Rooms.html">See details →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  
+    <section class="section">
+      <h3 class="section-title">Guest Reviews</h3>
+      <div class="grid3">
+        <div class="card">
+          <p class="quote">“Amazing view and super clean rooms. Perfect for weekend.”</p>
+          <p class="muted">— Aya, Tokyo</p>
+        </div>
+        <div class="card">
+          <p class="quote">“Staff were kind and helpful. Breakfast was delicious!”</p>
+          <p class="muted">— John, USA</p>
+        </div>
+        <div class="card">
+          <p class="quote">“Great location. Easy access to transport.”</p>
+          <p class="muted">— Rina, Osaka</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
     <p>&copy; 2025 MyHotel. All rights reserved.</p>
   </footer>
   <script>
-    let slides = document.querySelectorAll(".slide");
+    const slides = document.querySelectorAll(".slide");
     let current = 0;
   
     function showNextSlide() {
+      if (slides.length === 0) return;
       slides[current].classList.remove("active");
       current = (current + 1) % slides.length;
       slides[current].classList.add("active");
     }
   
-    setInterval(showNextSlide, 3000); // change image every 3 seconds
+    if (slides.length > 0) setInterval(showNextSlide, 3000);
   </script>
-  
 </body>
 </html>
