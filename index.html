@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Hotel site</title>
   <link rel="stylesheet" href="index.css">
+  <!-- Font Awesome (for social icons) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -21,7 +23,6 @@
   
     <!-- HERO overlay -->
     <div class="hero">
-      <h2>Find your perfect stay</h2>
       <p>Book comfortable rooms at the best prices.</p>
   
       <div class="hero-actions">
@@ -101,9 +102,27 @@
     </section>
   </main>
 
+
   <footer class="site-footer">
-    <p>&copy; 2025 MyHotel. All rights reserved.</p>
+    <div class="footer-content">
+      <p>&copy; <span id="year"></span> G Hotel. All rights reserved.</p>
+  
+      <div class="social-icons">
+        <a class="social facebook" href="https://www.facebook.com/" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+  
+        <a class="social instagram" href="https://www.instagram.com/" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+  
+        <a class="social mail" href="mailto:info@ghotel.jp">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+    </div>
   </footer>
+
   <script>
     const slides = document.querySelectorAll(".slide");
     let current = 0;
@@ -114,8 +133,11 @@
       current = (current + 1) % slides.length;
       slides[current].classList.add("active");
     }
-  
     if (slides.length > 0) setInterval(showNextSlide, 3000);
+
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
+
 </body>
 </html>

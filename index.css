@@ -225,3 +225,75 @@ main{ background:#fff; }
   .grid3{ grid-template-columns: 1fr; }
   .hero h2{ font-size: 32px; }
 }
+/* Social icons container */
+.social-icons{
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Circle background button */
+.social-icons .social{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+
+  color: #fff;
+  text-decoration: none;
+
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+/* Icon size */
+.social-icons .social i{
+  font-size: 18px;
+}
+
+/* Hover animation */
+.social-icons .social:hover{
+  transform: translateY(-4px) scale(1.06);
+  background: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.35);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.28);
+}
+
+/* Click animation */
+.social-icons .social:active{
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* Keyboard focus (nice accessibility) */
+.social-icons .social:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.35), 0 14px 28px rgba(0,0,0,0.28);
+}
+
+/* Optional: brand hover colors */
+.social-icons .facebook:hover{
+  background: rgba(24,119,242,0.25);
+}
+
+.social-icons .instagram:hover{
+  background: rgba(225,48,108,0.22);
+}
+.site-footer{
+  background: #0f172a;  /* dark navy luxury look */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
