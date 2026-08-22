@@ -1,101 +1,120 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Search | G Hotel</title>
-  <link rel="stylesheet" href="Search.css">
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offers & Booking | G Hotel</title>
+    <link rel="stylesheet" href="Search.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar container">
+        <div class="logo"><a href="index.html">G Hotel</a></div>
 
-  <!-- Header (共通) -->
-  <header class="site-header">
-    <nav class="navbar">
-      <h1 class="logo"><a href="index.html">G Hotel</a></h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="Rooms.html">Rooms</a></li>
-        <li><a href="Search.html" class="active">Search</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-        <li><a href="Stay.html">Stay</a></li>
-        <li><a href="Dine.html">Dine</a></li>
-      </ul>
-    </nav>
-  </header>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Rooms.html">Rooms</a></li>
+          <li><a href="Dine.html">Dining</a></li>
+          <li><a href="Stay.html">Stay</a></li>
+          <li><a href="Search.html" class="active">Offers</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
 
-  <!-- Booking Section -->
-  <main class="section">
-    <h2></h2>
-  
-    <form id="search-form">
-  
-      <div class="form-row">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="full name" required>
+        <a class="nav-button" href="#booking-form">Book Now</a>
+      </nav>
+
+      <div class="page-hero container">
+        <p class="eyebrow">Special offers</p>
+        <h1>Book your ideal stay with exclusive hotel deals.</h1>
+        <p>
+          Flexible rates, thoughtfully curated rooms, and premium hospitality for every trip.
+        </p>
       </div>
-  
-      <div class="form-row">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="@email.com" required>
-      </div>
-  
-      <div class="form-row">
-        <label for="checkin">Check-in</label>
-        <input type="date" id="checkin" name="checkin" required>
-      </div>
-  
-      <div class="form-row">
-        <label for="checkout">Check-out</label>
-        <input type="date" id="checkout" name="checkout" required>
+    </header>
+
+    <main class="section booking-page">
+      <div class="booking-shell">
+        <div class="booking-copy">
+          <p class="eyebrow dark">Stay smarter</p>
+          <h2>Enjoy a polished stay, tailored to your plans.</h2>
+          <ul class="check-list">
+            <li>Flexible dates and room upgrades</li>
+            <li>Complimentary breakfast on selected plans</li>
+            <li>Member pricing for longer stays</li>
+          </ul>
+        </div>
+
+        <form id="search-form" class="booking-form">
+          <div class="form-row">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required />
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="name@example.com" required />
+          </div>
+
+          <div class="double-row">
+            <div class="form-row">
+              <label for="checkin">Check-in</label>
+              <input type="date" id="checkin" name="checkin" required />
+            </div>
+
+            <div class="form-row">
+              <label for="checkout">Check-out</label>
+              <input type="date" id="checkout" name="checkout" required />
+            </div>
+          </div>
+
+          <div class="double-row">
+            <div class="form-row">
+              <label for="adults">Adults</label>
+              <input type="number" id="adults" min="1" max="10" value="2" required />
+            </div>
+
+            <div class="form-row">
+              <label for="children">Children</label>
+              <input type="number" id="children" min="0" max="10" value="0" />
+            </div>
+          </div>
+
+          <div class="double-row">
+            <div class="form-row">
+              <label for="rooms">Rooms</label>
+              <input type="number" id="rooms" min="1" max="3" value="1" required />
+            </div>
+
+            <div class="form-row">
+              <label for="room-type">Room Type</label>
+              <select id="room-type" name="roomType" required>
+                <option value="">Select</option>
+                <option value="standard">Standard Room</option>
+                <option value="deluxe">Deluxe Room</option>
+                <option value="suite">Suite</option>
+              </select>
+            </div>
+          </div>
+
+          <p id="guest-warning" class="warning"></p>
+          <p id="room-warning" class="warning"></p>
+
+          <div class="form-row actions-row">
+            <button type="submit">Check Availability</button>
+          </div>
+        </form>
       </div>
 
-      <div class="form-row">
-        <label for="rooms">Rooms</label>
-        <input type="number" id="rooms" min="1" max="3"　value="1 required">
-      </div>
+      <div id="results" class="results"></div>
+    </main>
 
-      <div class="form-row">
-        <label for="adults">Adults</label>
-        <input type="number" id="adults" min="1" max="10" value="1" required>
+    <footer class="site-footer">
+      <div class="footer-content container">
+        <p>© <span id="year"></span> G Hotel. All rights reserved.</p>
       </div>
-      
-      <div class="form-row">
-        <label for="children">Children</label>
-        <input type="number" id="children" min="0" max="10" value="0">
-      </div>
-      
-      <p id="guest-warning" style="color:rgb(109, 8, 8);"></p>
-      <p id="room-warning" style="color:rgb(109, 8, 8);"></p>
+    </footer>
 
-      
-      <div class="form-row">
-        <label for="room-type">Room type</label>
-        <select id="room-type" name="roomType" required>
-          <option value="">Select a room</option>
-          <option value="standard">Standard Room</option>
-          <option value="deluxe">Deluxe Room</option>
-          <option value="suite">Suite</option>
-        </select>
-      </div>
-  
-      <div class="form-row">
-        <button type="submit">検索</button>
-      </div>
-  
-    </form>
-    
-  
-    <!-- Results will appear here -->
-    <div id="results" class="results"></div>
-  </main>
-  
-
-  <!-- Footer (共通) -->
-  <footer class="site-footer">
-    <p>&copy; 2025 MyHotel. All rights reserved.</p>
-  </footer>
-
-  <script src="Search.js"></script>
-  
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="Search.js"></script>
+  </body>
 </html>

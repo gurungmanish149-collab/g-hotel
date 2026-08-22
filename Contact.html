@@ -1,29 +1,89 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | G Hotel</title>
-  <link rel="stylesheet" href="Contact.css">
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | G Hotel</title>
+    <link rel="stylesheet" href="Contact.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar container">
+        <div class="logo"><a href="index.html">G Hotel</a></div>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section contact">
-    <h2>Contact Us</h2>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Rooms.html">Rooms</a></li>
+          <li><a href="Dine.html">Dining</a></li>
+          <li><a href="Stay.html">Stay</a></li>
+          <li><a href="Search.html">Offers</a></li>
+          <li><a href="Contact.html" class="active">Contact</a></li>
+        </ul>
 
-    <div class="contact-wrapper">
-      <div class="contact-info">
-        <p><strong>G Hotel</strong></p>
+        <a class="nav-button" href="Search.html">Book Stay</a>
+      </nav>
+
+      <div class="page-hero container">
+        <p class="eyebrow">Contact</p>
+        <h1>We’re here to help plan your stay.</h1>
         <p>
-          〒220-0012<br>
-          神奈川県横浜市西区みなとみらい1-1-1
+          Reach out for room reservations, special requests, or travel information anytime.
         </p>
-        <p>Tel: 045-123-4567</p>
-        <p>Email: info@ghotel.jp</p>
       </div>
-    </div>
-  </section>
+    </header>
 
-</body>
+    <main class="contact-page section">
+      <div class="contact-layout">
+        <div class="contact-card info-card">
+          <p class="eyebrow dark">Get in touch</p>
+          <h2>G Hotel</h2>
+          <p>〒220-0012</p>
+          <p>1-1-1 Minato Mirai, Nishi Ward, Yokohama, Japan</p>
+          <p>Tel: 045-123-4567</p>
+          <p>Email: info@ghotel.jp</p>
+          <p>Check-in: 15:00</p>
+          <p>Check-out: 11:00</p>
+        </div>
+
+        <div class="contact-card form-card">
+          <form class="contact-form">
+            <div class="form-row">
+              <label for="contact-name">Your Name</label>
+              <input id="contact-name" type="text" placeholder="Enter your name" />
+            </div>
+
+            <div class="form-row">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" type="email" placeholder="Enter your email" />
+            </div>
+
+            <div class="form-row">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" rows="5" placeholder="Tell us how we can help"></textarea>
+            </div>
+
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content container">
+        <p>© <span id="year"></span> G Hotel. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const form = document.querySelector('.contact-form');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        alert('Thank you. Your message has been received by the G Hotel team.');
+        form.reset();
+      });
+
+      const yearNode = document.getElementById('year');
+      if (yearNode) yearNode.textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>

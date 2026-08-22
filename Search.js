@@ -1,140 +1,197 @@
-// search rooms
+const roomCatalog = {
+  standard: {
+    name: 'Standard Room',
+    pricePerNight: 8000,
+    details: 'Queen bed, city view, essentials included'
+  },
+  deluxe: {
+    name: 'Deluxe Room',
+    pricePerNight: 12000,
+    details: 'King bed, larger space, premium amenities'
+  },
+  suite: {
+    name: 'Executive Suite',
+    pricePerNight: 20000,
+    details: 'Separate lounge, luxury bathroom, premium service'
+  }
+};
 
-const form = document.getElementById("search-form");
-const results = document.getElementById("results");
+const EMAILJS_PUBLIC_KEY = 'hHtZp0_z-JExoO-H1';
+const EMAILJS_SERVICE_ID = 'service_hokfksb';
+const EMAILJS_TEMPLATE_ID = 'template_34ekhql';
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+if (window.emailjs && EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.includes('YOUR_')) {
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+}
 
-  // 入力値取得
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const checkin = document.getElementById("checkin").value;
-  const checkout = document.getElementById("checkout").value;
+const form = document.getElementById('search-form');
+const results = document.getElementById('results');
 
-  const adults = Number(document.getElementById("adults").value);
-  const children = Number(document.getElementById("children").value);
-  const rooms = Number(document.getElementById("rooms").value);
+async function sendBookingConfirmation(booking) {
+  const hasEmailConfig =
+    window.emailjs &&
+    EMAILJS_SERVICE_ID &&
+    !EMAILJS_SERVICE_ID.includes('YOUR_') &&
+    EMAILJS_TEMPLATE_ID &&
+    !EMAILJS_TEMPLATE_ID.includes('YOUR_');
 
-  const roomType = document.getElementById("room-type").value;
-
-  const totalGuests = adults + children;
-
-  // ① 未入力チェック
-  if (!name || !email || !checkin || !checkout || !roomType) {
-    alert("すべての項目を入力してください。");
-    return;
+  if (!hasEmailConfig) {
+    return { success: false, message: 'EmailJS is not configured.' };
   }
 
-  // 数値系の安全チェック（念のため）
-  if (Number.isNaN(adults) || Number.isNaN(children) || Number.isNaN(rooms)) {
-    alert("人数・部屋数を正しく入力してください。");
-    return;
+  try {
+    const templateParams = {
+      guest_name: booking.name,
+      guest_email: booking.email,
+      room_name: booking.roomName,
+      checkin: booking.checkin,
+      checkout: booking.checkout,
+      nights: booking.nights,
+      total: formatCurrency(booking.total),
+      message: `Thank you for booking with G Hotel. Your stay is confirmed. We look forward to welcoming you.`
+    };
+
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to send booking email:', error);
+    return {
+      success: false,
+      message: error?.text || error?.message || 'EmailJS could not send the confirmation.'
+    };
+  }
+}
+
+function calculateNights(checkin, checkout) {
+  const start = new Date(checkin);
+  const end = new Date(checkout);
+  const diffMs = end - start;
+  return Math.max(1, Math.round(diffMs / (1000 * 60 * 60 * 24)));
+}
+
+function formatCurrency(value) {
+  return `¥${value.toLocaleString('en-US')}`;
+}
+
+function validateBooking(values) {
+  if (!values.name || !values.email || !values.checkin || !values.checkout || !values.roomType) {
+    return 'Please fill in all required fields.';
   }
 
-  // ② 日付チェック
-  if (checkin >= checkout) {
-    alert("チェックアウト日はチェックイン日より後にしてください。");
-    return;
+  if (values.checkin >= values.checkout) {
+    return 'Check-out date must be later than the check-in date.';
   }
 
-  // ③ 人数制限（合計10名まで）
-  if (totalGuests > 10) {
-    alert("人数制限は合計10名までです。");
-    return;
+  if (values.totalGuests > 10) {
+    return 'Maximum guest capacity is 10 people.';
   }
 
-  // ④ 部屋数制限（最大3室まで）
-  if (rooms > 3) {
-    alert("部屋数は最大3室までです。");
-    return;
+  if (values.rooms > 3) {
+    return 'Maximum room count is 3 rooms.';
   }
 
-  // ⑤ 空室データ（仮・検証用）
-  const availableRooms = [
-    { type: "Standard Room", price: "¥8,000 / night", key: "standard" },
-    { type: "Deluxe Room", price: "¥12,000 / night", key: "deluxe" },
-    { type: "Suite", price: "¥20,000 / night", key: "suite" }
-  ];
+  if (!(values.roomType in roomCatalog)) {
+    return 'Please choose a valid room type.';
+  }
 
-  // ⑥ 選択された部屋だけ表示
-  const filteredRooms = availableRooms.filter(room => room.key === roomType);
+  return '';
+}
 
-  // ⑦ 結果表示
+function renderResult(data) {
+  const nights = calculateNights(data.checkin, data.checkout);
+  const room = roomCatalog[data.roomType];
+  const subtotal = room.pricePerNight * data.rooms * nights;
+  const total = subtotal + 1200;
+
   results.innerHTML = `
-    <h3>Available Rooms</h3>
-    <div class="summary">
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Check-in:</strong> ${checkin}</p>
-      <p><strong>Check-out:</strong> ${checkout}</p>
-      <p><strong>Guests:</strong> Adults ${adults}, Children ${children}（合計 ${totalGuests}）</p>
-      <p><strong>Rooms:</strong> ${rooms}</p>
+    <div class="room-card">
+      <h3>Available room</h3>
+      <p><strong>${room.name}</strong></p>
+      <p>${room.details}</p>
+      <p><strong>Rate:</strong> ${formatCurrency(room.pricePerNight)} / night</p>
+      <p><strong>Stay:</strong> ${nights} night(s)</p>
+      <p><strong>Rooms:</strong> ${data.rooms}</p>
+      <p><strong>Guests:</strong> ${data.totalGuests}</p>
+      <p><strong>Subtotal:</strong> ${formatCurrency(subtotal)}</p>
+      <p><strong>Service fee:</strong> ${formatCurrency(1200)}</p>
+      <p><strong>Total:</strong> ${formatCurrency(total)}</p>
+      <button type="button" class="confirm-btn">Confirm Booking</button>
     </div>
   `;
 
-  if (filteredRooms.length === 0) {
-    results.innerHTML += `<p>選択した部屋タイプの空室が見つかりません。</p>`;
+  const confirmButton = document.querySelector('.confirm-btn');
+  if (confirmButton) {
+    confirmButton.addEventListener('click', async () => {
+      const booking = {
+        ...data,
+        roomName: room.name,
+        nights,
+        total,
+        bookedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem('ghotelBooking', JSON.stringify(booking));
+
+      const emailResult = await sendBookingConfirmation(booking);
+
+      const emailStatus = emailResult.success
+        ? `A confirmation email has been sent to ${data.email}.`
+        : `Your booking is saved locally, but the email was not sent. Error: ${emailResult.message}`;
+
+      results.innerHTML = `
+        <div class="room-card">
+          <h3>Booking confirmed</h3>
+          <p><strong>${data.name}</strong>, your reservation for ${room.name} is confirmed.</p>
+          <p><strong>Check-in:</strong> ${data.checkin}</p>
+          <p><strong>Check-out:</strong> ${data.checkout}</p>
+          <p><strong>Total paid:</strong> ${formatCurrency(total)}</p>
+          <p>${emailStatus}</p>
+        </div>
+      `;
+    });
+  }
+}
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const values = {
+    name: document.getElementById('name').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    checkin: document.getElementById('checkin').value,
+    checkout: document.getElementById('checkout').value,
+    adults: Number(document.getElementById('adults').value),
+    children: Number(document.getElementById('children').value),
+    rooms: Number(document.getElementById('rooms').value),
+    roomType: document.getElementById('room-type').value
+  };
+
+  values.totalGuests = values.adults + values.children;
+
+  const validationMessage = validateBooking(values);
+  if (validationMessage) {
+    alert(validationMessage);
     return;
   }
 
-  filteredRooms.forEach(room => {
-    results.innerHTML += `
-      <div class="room-card">
-        <p><strong>${room.type}</strong></p>
-        <p>${room.price}</p>
-        <button type="button" class="next-btn"
-          data-room="${room.key}"
-          data-rooms="${rooms}"
-          data-adults="${adults}"
-          data-children="${children}"
-          data-checkin="${checkin}"
-          data-checkout="${checkout}"
-        >next</button>
-      </div>
-    `;
-  });
-
-  // nextボタンのクリック（必要なら）
-  document.querySelectorAll(".next-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      // ここで次ページに渡す or localStorage 保存など
-      alert("次へ進みます（ここに処理を追加できます）");
-    });
-  });
+  renderResult(values);
 });
 
-
-
-
-// 合計10人まで制限
-const adults = document.getElementById("adults");
-const children = document.getElementById("children");
-const rooms = document.getElementById("rooms");
-
-const guestWarning = document.getElementById("guest-warning");
-const roomWarning = document.getElementById("room-warning");
+const adults = document.getElementById('adults');
+const children = document.getElementById('children');
+const rooms = document.getElementById('rooms');
+const guestWarning = document.getElementById('guest-warning');
+const roomWarning = document.getElementById('room-warning');
 
 function checkGuestsAndRooms() {
   const totalGuests = Number(adults.value) + Number(children.value);
   const totalRooms = Number(rooms.value);
 
-  // 人数制限（10名まで）
-  if (totalGuests > 10) {
-    guestWarning.textContent = "人数制限は10名までです";
-  } else {
-    guestWarning.textContent = "";
-  }
-
-  // 部屋数制限（3室まで）
-  if (totalRooms > 3) {
-    roomWarning.textContent = "部屋数は最大3室までです";
-  } else {
-    roomWarning.textContent = "";
-  }
+  guestWarning.textContent = totalGuests > 10 ? 'Guest limit is 10 people.' : '';
+  roomWarning.textContent = totalRooms > 3 ? 'Room limit is 3 rooms.' : '';
 }
 
-adults.addEventListener("input", checkGuestsAndRooms);
-children.addEventListener("input", checkGuestsAndRooms);
-rooms.addEventListener("input", checkGuestsAndRooms);
+adults.addEventListener('input', checkGuestsAndRooms);
+children.addEventListener('input', checkGuestsAndRooms);
+rooms.addEventListener('input', checkGuestsAndRooms);
 

@@ -1,78 +1,108 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Rooms | G Hotel</title>
-  <link rel="stylesheet" href="Rooms.css">
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rooms | G Hotel</title>
+    <link rel="stylesheet" href="Rooms.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar container">
+        <div class="logo"><a href="index.html">G Hotel</a></div>
 
-  <!-- Header (共通) -->
-  <header class="site-header">
-    <nav class="navbar">
-      <h1 class="logo"><a href="index.html">G Hotel</a></h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="Rooms.html" class="active">Rooms</a></li>
-        <li><a href="Search.html">Search</a></li>
-        <li><a href="Contact.html">Contact</a></li>
-        <li><a href="Stay.html">Stay</a></li>
-        <li><a href="Dine.html">Dine</a></li>
-      </ul>
-    </nav>
-  </header>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Rooms.html" class="active">Rooms</a></li>
+          <li><a href="Dine.html">Dining</a></li>
+          <li><a href="Stay.html">Stay</a></li>
+          <li><a href="Search.html">Offers</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
 
-  <!-- Rooms -->
-  <main class="section">
-    <h2>Our Rooms</h2>
+        <a class="nav-button" href="Search.html">Book Now</a>
+      </nav>
 
-    <div class="rooms-slider">
-
-      <button class="arrow left" id="prevBtn">‹</button>
-    
-      <div class="rooms-wrapper">
-        <div class="rooms-track" id="roomsTrack">
-    
-          <div class="room-slide">
-            <img src="images/standard.jpg" alt="Standard Room">
-            <div class="room-info">
-              <h3>Standard Room</h3>
-              <p>Comfortable room with basic facilities.</p>
-              <div class="price">¥8,000 / night</div>
-            </div>
-          </div>
-    
-          <div class="room-slide">
-            <img src="images/deluxe.jpg" alt="Deluxe Room">
-            <div class="room-info">
-              <h3>Deluxe Room</h3>
-              <p>Spacious room with great city views.</p>
-              <div class="price">¥12,000 / night</div>
-            </div>
-          </div>
-    
-          <div class="room-slide">
-            <img src="images/suite.jpg" alt="Suite">
-            <div class="room-info">
-              <h3>Suite</h3>
-              <p>Luxury suite with living room and balcony.</p>
-              <div class="price">¥20,000 / night</div>
-            </div>
-          </div>
-    
-        </div>
+      <div class="page-hero container">
+        <p class="eyebrow">Accommodations</p>
+        <h1>Rooms designed for restful nights and memorable stays.</h1>
+        <p>
+          Discover thoughtful comfort, elegant interiors, and timeless hospitality in every space.
+        </p>
       </div>
-    
-      <button class="arrow right" id="nextBtn">›</button>
-    
-    </div>
-  </main>
+    </header>
 
-  <!-- Footer (共通) -->
-  <footer class="site-footer">
-    <p>&copy; 2025 MyHotel. All rights reserved.</p>
-  </footer>
-  <script src="Rooms.js"></script>
+    <main>
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow dark">Choose your room</p>
+          <h2>Luxury stays tailored to every traveler.</h2>
+        </div>
 
-</body>
+        <div class="room-grid">
+          <article class="room-card">
+            <img src="images/standard.jpg" alt="Standard room" />
+            <div class="room-body">
+              <span class="tag">Standard</span>
+              <h3>Standard Room</h3>
+              <p>Comfortable bedding, calming design, and all the essentials for a smooth stay.</p>
+              <div class="price">From ¥8,000 / night</div>
+              <a href="Search.html" class="room-link">Reserve room</a>
+            </div>
+          </article>
+
+          <article class="room-card feature-focus">
+            <img src="images/deluxe.jpg" alt="Deluxe room" />
+            <div class="room-body">
+              <span class="tag">Deluxe</span>
+              <h3>Deluxe Room</h3>
+              <p>Spacious rooms with elevated finishes, city views, and a quiet, premium atmosphere.</p>
+              <div class="price">From ¥12,000 / night</div>
+              <a href="Search.html" class="room-link">Reserve room</a>
+            </div>
+          </article>
+
+          <article class="room-card">
+            <img src="images/suite.jpg" alt="Suite room" />
+            <div class="room-body">
+              <span class="tag">Suite</span>
+              <h3>Executive Suite</h3>
+              <p>Private lounge comfort, refined interiors, and ample space for extended stays.</p>
+              <div class="price">From ¥20,000 / night</div>
+              <a href="Search.html" class="room-link">Reserve room</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section alt-section">
+        <div class="benefits-wrap">
+          <div class="benefits-copy">
+            <p class="eyebrow dark">Included with every stay</p>
+            <h3>Everything you need for a flawless visit.</h3>
+          </div>
+
+          <ul class="amenities-list">
+            <li>High-speed Wi‑Fi</li>
+            <li>Complimentary breakfast</li>
+            <li>24/7 concierge service</li>
+            <li>In-room coffee setup</li>
+            <li>Daily housekeeping</li>
+            <li>Airport transfer assistance</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content container">
+        <p>© <span id="year"></span> G Hotel. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const yearNode = document.getElementById('year');
+      if (yearNode) yearNode.textContent = new Date().getFullYear();
+    </script>
+  </body>
 </html>
